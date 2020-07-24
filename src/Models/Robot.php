@@ -255,7 +255,7 @@ class Robot
     }
 
     /**
-     * Report the Robot's current position and direction
+     * Report the Robot's current position and direction.
      *
      * @return string
      * @throws RobotException
