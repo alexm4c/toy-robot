@@ -163,10 +163,10 @@ class Robot
      * @param string $direction
      * @throws RobotException
      */
-    public function place(int $x, int $y, string $direction): void
+    public function place(int $x, int $y, string $directionString): void
     {
         $this->setPosition($x, $y);
-        $this->setDirection($direction);
+        $this->setDirection($directionString);
     }
 
     /**
