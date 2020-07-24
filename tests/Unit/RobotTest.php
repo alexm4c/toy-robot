@@ -23,8 +23,8 @@ class RobotTest extends TestCase
         $this->expectException(RobotException::class);
 
         $robot->setPosition(-1, -1);
-        $robot->setPosition(5, 5);
-        $robot->setPosition(100, 100);
+        $robot->setPosition(5, 5); // These second two calls
+        $robot->setPosition(100, 100); // don't actually test anything.
     }
 
     public function testCanSetValidPosition()
