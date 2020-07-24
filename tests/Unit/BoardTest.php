@@ -18,8 +18,9 @@ class BoardTest extends TestCase
         $board = new Board(5, 5);
 
         $this->assertFalse($board->validatePosition(-1, -1));
+        $this->assertFalse($board->validatePosition(-1, 5));
+        $this->assertFalse($board->validatePosition(5, -1));
         $this->assertFalse($board->validatePosition(5, 5));
-        $this->assertFalse($board->validatePosition(100, 100));
     }
 
     public function testReturnTrueOnValidPosition(): void
@@ -27,7 +28,8 @@ class BoardTest extends TestCase
         $board = new Board(5, 5);
 
         $this->assertTrue($board->validatePosition(0, 0));
-        $this->assertTrue($board->validatePosition(2, 2));
+        $this->assertTrue($board->validatePosition(0, 4));
+        $this->assertTrue($board->validatePosition(4, 0));
         $this->assertTrue($board->validatePosition(4, 4));
     }
 }
