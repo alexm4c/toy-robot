@@ -71,7 +71,9 @@ class Robot
 
     /**
      * Get Robot position as (x, y) array.
-     *
+     * 
+     * Format: ['x' => 3, 'y' => 3]
+     * 
      * @return array|null
      */
     public function getPosition(): ?array
