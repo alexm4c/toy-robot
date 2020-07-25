@@ -1,5 +1,4 @@
 #!/usr/bin/env php
-
 <?php
     /**
      * Feed the RobotController the list of commands we pulled from the input file.
