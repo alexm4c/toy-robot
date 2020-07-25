@@ -18,7 +18,7 @@ At this stage we only need composer so we can grab phpunit for running tests.
 
 
 ``` bash
-./vendor/bin/phpunit tests
+composer test
 ```
 
 ### Usage
