@@ -7,33 +7,32 @@ use ToyRobot\Models\Robot;
 
 class RobotTest extends TestCase
 {
-    public function testPositionIsNullOnInit()
+    protected $robot;
+
+    protected function setUp(): void
     {
         $board = new Board(5, 5);
-        $robot = new Robot($board);
+        $this->robot = new Robot($board);
+    }
 
-        $this->assertNull($robot->getPosition());
+    public function testPositionIsNullOnInit()
+    {
+        $this->assertNull($this->robot->getPosition());
     }
 
     public function testCannotSetInvalidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->setPosition(-1, -1);
-        $robot->setPosition(5, 5); // These second two calls
-        $robot->setPosition(100, 100); // don't actually test anything.
+        $this->robot->setPosition(-1, -1);
+        $this->robot->setPosition(5, 5); // These second two calls
+        $this->robot->setPosition(100, 100); // don't actually test anything.
     }
 
     public function testCanSetValidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
-        $robot->setPosition(3, 3);
-        $position = $robot->getPosition();
+        $this->robot->setPosition(3, 3);
+        $position = $this->robot->getPosition();
 
         $this->assertEquals($position['x'], 3);
         $this->assertEquals($position['y'], 3);
@@ -41,29 +40,20 @@ class RobotTest extends TestCase
 
     public function testDirectionIsNullOnInit()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
-        $this->assertNull($robot->getDirection());
+        $this->assertNull($this->robot->getDirection());
     }
 
     public function testFailIfSetInvalidDirection()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->setDirection('ASDF');
+        $this->robot->setDirection('ASDF');
     }
 
     public function testCanSetNorthDirection()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
-        $robot->setDirection('NORTH');
-        $direction = $robot->getDirection();
+        $this->robot->setDirection('NORTH');
+        $direction = $this->robot->getDirection();
 
         $this->assertEquals($direction['name'], 'north');
         $this->assertEquals($direction['x'], 0);
@@ -72,11 +62,8 @@ class RobotTest extends TestCase
 
     public function testCanSetEastDirection()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-                
-        $robot->setDirection('EAST');
-        $direction = $robot->getDirection();
+        $this->robot->setDirection('EAST');
+        $direction = $this->robot->getDirection();
 
         $this->assertEquals($direction['name'], 'east');
         $this->assertEquals($direction['x'], 1);
@@ -85,11 +72,8 @@ class RobotTest extends TestCase
 
     public function testCanSetSouthDirection()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-                
-        $robot->setDirection('SOUTH');
-        $direction = $robot->getDirection();
+        $this->robot->setDirection('SOUTH');
+        $direction = $this->robot->getDirection();
 
         $this->assertEquals($direction['name'], 'south');
         $this->assertEquals($direction['x'], 0);
@@ -98,11 +82,8 @@ class RobotTest extends TestCase
 
     public function testCanSetWestDirection()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-                
-        $robot->setDirection('WEST');
-        $direction = $robot->getDirection();
+        $this->robot->setDirection('WEST');
+        $direction = $this->robot->getDirection();
 
         $this->assertEquals($direction['name'], 'west');
         $this->assertEquals($direction['x'], -1);
@@ -111,12 +92,9 @@ class RobotTest extends TestCase
 
     public function testCanPlaceWithValidPositionAndDirection()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
-        $robot->place(1, 1, 'WEST');
-        $direction = $robot->getDirection();
-        $position = $robot->getPosition();
+        $this->robot->place(1, 1, 'WEST');
+        $direction = $this->robot->getDirection();
+        $position = $this->robot->getPosition();
 
         $this->assertEquals($direction['name'], 'west');
         $this->assertEquals($position['x'], 1);
@@ -125,53 +103,40 @@ class RobotTest extends TestCase
 
     public function testCannotPlaceWithInvalidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->place(-1, -1, 'WEST');
+        $this->robot->place(-1, -1, 'WEST');
     }
 
     public function testCannotPlaceWithInvalidDirection()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->place(1, 1, 'ASDF');
+        $this->robot->place(1, 1, 'ASDF');
     }
 
     public function testCannotMoveIfUnplaced()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->move();
+        $this->robot->move();
     }
 
     public function testCannotMoveToInvalidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(0, 0, 'SOUTH');
+        $this->robot->place(0, 0, 'SOUTH');
 
         $this->expectException(RobotException::class);
 
-        $robot->move();
+        $this->robot->move();
     }
 
     public function testCanMoveNorthToValidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(1, 1, 'NORTH');
-        $robot->move();
+        $this->robot->place(1, 1, 'NORTH');
+        $this->robot->move();
 
-        $position = $robot->getPosition();
+        $position = $this->robot->getPosition();
 
         $this->assertEquals($position['x'], 1);
         $this->assertEquals($position['y'], 2);
@@ -179,12 +144,10 @@ class RobotTest extends TestCase
 
     public function testCanMoveEastToValidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(1, 1, 'EAST');
-        $robot->move();
+        $this->robot->place(1, 1, 'EAST');
+        $this->robot->move();
 
-        $position = $robot->getPosition();
+        $position = $this->robot->getPosition();
 
         $this->assertEquals($position['x'], 2);
         $this->assertEquals($position['y'], 1);
@@ -192,12 +155,10 @@ class RobotTest extends TestCase
 
     public function testCanMoveSouthToValidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(1, 1, 'SOUTH');
-        $robot->move();
+        $this->robot->place(1, 1, 'SOUTH');
+        $this->robot->move();
 
-        $position = $robot->getPosition();
+        $position = $this->robot->getPosition();
 
         $this->assertEquals($position['x'], 1);
         $this->assertEquals($position['y'], 0);
@@ -205,12 +166,10 @@ class RobotTest extends TestCase
 
     public function testCanMoveWestToValidPosition()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(1, 1, 'WEST');
-        $robot->move();
+        $this->robot->place(1, 1, 'WEST');
+        $this->robot->move();
 
-        $position = $robot->getPosition();
+        $position = $this->robot->getPosition();
 
         $this->assertEquals($position['x'], 0);
         $this->assertEquals($position['y'], 1);
@@ -218,79 +177,64 @@ class RobotTest extends TestCase
 
     public function testCannotRotateLeftIfUnplaced()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->rotateLeft();
+        $this->robot->rotateLeft();
     }
 
     public function testCannotRotateRightIfUnplaced()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->rotateRight();
+        $this->robot->rotateRight();
     }
 
     public function testCanRotateLeft()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(1, 1, 'SOUTH');
+        $this->robot->place(1, 1, 'SOUTH');
         
-        $robot->rotateLeft();
-        $this->assertEquals($robot->getDirectionName(), 'east');
+        $this->robot->rotateLeft();
+        $this->assertEquals($this->robot->getDirectionName(), 'east');
 
-        $robot->rotateLeft();
-        $this->assertEquals($robot->getDirectionName(), 'north');
+        $this->robot->rotateLeft();
+        $this->assertEquals($this->robot->getDirectionName(), 'north');
 
-        $robot->rotateLeft();
-        $this->assertEquals($robot->getDirectionName(), 'west');
+        $this->robot->rotateLeft();
+        $this->assertEquals($this->robot->getDirectionName(), 'west');
 
-        $robot->rotateLeft();
-        $this->assertEquals($robot->getDirectionName(), 'south');
+        $this->robot->rotateLeft();
+        $this->assertEquals($this->robot->getDirectionName(), 'south');
     }
 
     public function testCanRotateRight()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(1, 1, 'SOUTH');
+        $this->robot->place(1, 1, 'SOUTH');
         
-        $robot->rotateRight();
-        $this->assertEquals($robot->getDirectionName(), 'west');
+        $this->robot->rotateRight();
+        $this->assertEquals($this->robot->getDirectionName(), 'west');
 
-        $robot->rotateRight();
-        $this->assertEquals($robot->getDirectionName(), 'north');
+        $this->robot->rotateRight();
+        $this->assertEquals($this->robot->getDirectionName(), 'north');
 
-        $robot->rotateRight();
-        $this->assertEquals($robot->getDirectionName(), 'east');
+        $this->robot->rotateRight();
+        $this->assertEquals($this->robot->getDirectionName(), 'east');
 
-        $robot->rotateRight();
-        $this->assertEquals($robot->getDirectionName(), 'south');
+        $this->robot->rotateRight();
+        $this->assertEquals($this->robot->getDirectionName(), 'south');
     }
 
     public function testCannotReportIfUnplaced()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-
         $this->expectException(RobotException::class);
 
-        $robot->report();
+        $this->robot->report();
     }
 
     public function testCanReport()
     {
-        $board = new Board(5, 5);
-        $robot = new Robot($board);
-        $robot->place(1, 1, 'SOUTH');
+        $this->robot->place(1, 1, 'SOUTH');
 
-        $report = $robot->report();
+        $report = $this->robot->report();
         
         $this->assertEquals($report, '1,1,SOUTH');
     }
