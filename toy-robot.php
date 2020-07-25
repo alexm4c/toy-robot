@@ -69,7 +69,10 @@
     function usage(string $name)
     {
         print("usage: {$name} input_file\n\n");
-        print("  input_file:\tThe filepath containing robot commands to be processed.\n\n");
+        print("  input_file\t\tThe filepath containing robot commands to be processed\n\n");
+        print("options:\n\n");
+        print("  -v --verbose\t\tDisplay robot warnings\n\n");
+        print("  -h --help\t\tShow this message\n\n");
     }
 
     /**
