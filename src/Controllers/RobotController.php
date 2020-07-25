@@ -2,6 +2,7 @@
 
 namespace ToyRobot\Controllers;
 
+use ToyRobot\Exceptions\RobotException;
 use ToyRobot\Models\Board;
 use ToyRobot\Models\Robot;
 
@@ -22,10 +23,47 @@ class RobotController
      * Give the robot a command from string and optional array of arguments.
      *
      * @param string $command
-     * @param array|null $args
+     * @param array|null $arguments
+     * @param bool $verbose
      */
-    public function run(string $command, array $args = null)
-    {
-        //
+    public function run(
+        string $command,
+        array $arguments = null,
+        bool $verbose = false
+    ) {
+        $command = strtolower($command);
+
+        try {
+            switch ($command) {
+                case 'place':
+                    if (count($arguments) >= 3) {
+                        $this->robot->place(
+                            intval($arguments[0]), // X
+                            intval($arguments[1]), // Y
+                            $arguments[2] // Direction
+                        );
+                    }
+                    break;
+                case 'move':
+                    $this->robot->move();
+                    break;
+                case 'left':
+                    $this->robot->rotateLeft();
+                    break;
+                case 'right':
+                    $this->robot->rotateRight();
+                    break;
+                case 'report':
+                    echo $this->robot->report() . "\n";
+                    break;
+                default:
+                    // Ignore invalid command
+                    break;
+            }
+        } catch (RobotException $e) {
+            if ($verbose) {
+                print("Ignored \"{$command}\": " . $e->getMessage(). "\n");
+            }
+        }
     }
 }
