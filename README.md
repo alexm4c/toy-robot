@@ -28,13 +28,7 @@ To run the toy robot:
 php toy-robot.php commands/corner-to-corner
 ```
 
-Where `commands` is any text file containing commands for the robot. Commands are accepted in the following format:
-
-```
-COMMAND ARG1,ARG2,ARG3
-```
-
-Arguments are optional.
+Any text file containing commands for the robot can be used.
 
 ### Commands
 
