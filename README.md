@@ -1,6 +1,8 @@
 Toy Robot Simulator
 ===================
 
+Toy robot simulator challenge for Xplor by Alex McBain.
+
 Installation and Usage Instructions
 -----------
 
