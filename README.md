@@ -1,14 +1,16 @@
 Toy Robot Simulator
 ===================
 
-Toy robot simulator challenge for Xplor by Alex McBain.
+Coding challenge for Xplor by Alex McBain.
 
 Installation and Usage Instructions
 -----------
 
 ### Composer
 
-Install composer https://getcomposer.org/download/. In the following steps I have composer installed globally. Once you have composer installed you can install depencies with:
+Install composer https://getcomposer.org/download/. 
+
+Use composer install project dependencies:
 
 ``` bash
 composer install
