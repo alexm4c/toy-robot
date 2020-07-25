@@ -5,7 +5,7 @@
      *
      * @param array $commands
      */
-    function run(array $commands)
+    function run(array $commands, bool $verbose = false)
     {
         require __DIR__.'/vendor/autoload.php';
 
@@ -14,7 +14,8 @@
         foreach ($commands as $command) {
             $controller->run(
                 $command['name'],
-                $command['arguments'] ?? null
+                $command['arguments'] ?? null,
+                $verbose
             );
         }
     }
@@ -81,7 +82,7 @@
     function args(int $argc, array $argv)
     {
         if ($argc < 2) {
-            print("Aborted: You must specify an input file\n\n");
+            print("ABORT: You must specify an input file\n\n");
             usage($argv[0]);
             exit(1);
         }
@@ -94,19 +95,30 @@
         $filePath = $argv[1];
 
         if (!file_exists($filePath)) {
-            print("Aborted: {$filePath} is not a valid input file\n\n");
+            print("ABORT: {$filePath} is not a valid input file\n\n");
             usage($argv[0]);
             exit(1);
         }
 
-        return $filePath;
+        if (isset($argv[2]) && in_array($argv[2], ['--verbose', '-v'])) {
+            print("VERBOSE\n");
+            $verbose = true;
+        }
+
+        return [
+            'file_path' => $filePath,
+            'verbose' => $verbose ?? false,
+        ];
     }
 
     function main(int $argc, array $argv)
     {
-        $filePath = args($argc, $argv);
-        $commands = process($filePath);
-        run($commands);
+        $arguments = args($argc, $argv);
+
+        $commands = process($arguments['file_path']);
+
+        run($commands, $arguments['verbose']);
+
         exit();
     }
 

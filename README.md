@@ -90,3 +90,14 @@ Expected output:
 Expected output:
 
     0,0,SOUTH
+
+Notes
+------------------------
+
+### Verbose Mode
+
+If you ever need to see what the robot is thinking you can use verbose mode:
+
+``` bash
+php toy-robot.php README.md -v
+```
