@@ -10,7 +10,7 @@ Installation and Usage Instructions
 
 Install composer https://getcomposer.org/download/. 
 
-Use composer install project dependencies:
+Use composer to install project dependencies:
 
 ``` bash
 composer install
@@ -56,3 +56,37 @@ WEST
 ```
 
 Invalid or incomplete commands will be ignored by the robot.
+
+Example Input and Output
+------------------------
+
+### Corner to corner
+
+    PLACE 0,0,NORTH
+    MOVE
+    MOVE
+    MOVE
+    MOVE
+    RIGHT
+    MOVE
+    MOVE
+    MOVE
+    MOVE
+    REPORT
+
+Expected output:
+
+    4,4,EAST
+
+### Spin left
+
+    PLACE 0,0,SOUTH
+    LEFT
+    LEFT
+    LEFT
+    LEFT
+    REPORT
+
+Expected output:
+
+    0,0,SOUTH
