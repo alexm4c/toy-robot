@@ -12,10 +12,7 @@ Install composer https://getcomposer.org/download/. In the following steps I hav
 composer install
 ```
 
-At this stage we only need composer so we can grab phpunit for running tests.
-
 ### Testing
-
 
 ``` bash
 composer test
@@ -23,3 +20,41 @@ composer test
 
 ### Usage
 
+To run the toy robot:
+
+``` bash
+php toy-robot.php commands
+```
+
+Where `commands` is any text file containing commands for the robot. Commands are accepted in the following format:
+
+```
+COMMAND ARG1,ARG2,ARG3
+```
+
+Arguments are optional.
+
+### Commands
+
+The robot will accept the following commands:
+
+```
+PLACE X,Y,DIR
+MOVE
+LEFT
+RIGHT
+REPORT
+```
+
+When running the `PLACE` command, arguments `X` and `Y` determine the robot's position, and `DIR` determines the direction the robot will be facing.
+
+The robot can will accept the four compass directions for values of `DIR`:
+
+```
+NORTH
+EAST
+SOUTH
+WEST
+```
+
+Invalid or incomplete commands will be ignored by the robot.
