@@ -25,7 +25,7 @@ composer test
 To run the toy robot:
 
 ``` bash
-php toy-robot.php commands
+php toy-robot.php commands/corner-to-corner
 ```
 
 Where `commands` is any text file containing commands for the robot. Commands are accepted in the following format:
