@@ -52,7 +52,12 @@ class RobotController
                     }
                     break;
                 case 'move':
-                    $this->robot->move();
+                    // Optional no. steps argument
+                    $steps = 1;
+                    if (isset($arguments[0]) && is_numeric($arguments[0])) {
+                        $steps = intval($arguments[0]);
+                    }
+                    $this->robot->move($steps);
                     break;
                 case 'left':
                     $this->robot->rotateLeft();

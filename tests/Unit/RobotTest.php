@@ -194,6 +194,28 @@ class RobotTest extends TestCase
         $this->assertEquals($position['y'], 1);
     }
 
+    public function testCanMoveMultipleSteps()
+    {
+        $this->robot->place(0, 0, 'NORTH');
+        $this->robot->move(4);
+
+        $position = $this->robot->getPosition();
+
+        $this->assertEquals($position['x'], 0);
+        $this->assertEquals($position['y'], 4);
+    }
+
+    public function testCanMoveZeroSteps()
+    {
+        $this->robot->place(0, 0, 'NORTH');
+        $this->robot->move(0);
+
+        $position = $this->robot->getPosition();
+
+        $this->assertEquals($position['x'], 0);
+        $this->assertEquals($position['y'], 0);
+    }
+
     public function testCannotRotateLeftIfUnplaced()
     {
         $this->expectException(RobotException::class);

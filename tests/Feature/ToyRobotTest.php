@@ -45,6 +45,15 @@ class ToyRobotTest extends TestCase
         $this->assertEquals($result, '4,0,SOUTH');
     }
 
+    public function testCanRunFourCornersFast()
+    {
+        $command = __DIR__ . '/../../toy-robot.php commands/four-corners-fast';
+        $result = `$command`;
+        $result = $result ? trim($result) : null;
+
+        $this->assertEquals($result, '4,0,WEST');
+    }
+
     public function testCanRunInvalid()
     {
         $command = __DIR__ . '/../../toy-robot.php commands/invalid';

@@ -38,7 +38,7 @@ incomplete commands will be ignored.
 
 ```
 PLACE X,Y,DIR
-MOVE
+MOVE STEPS?
 LEFT
 RIGHT
 REPORT
@@ -53,11 +53,12 @@ face. The Robot will ignore any other command if it is not yet placed.
 #### Move
 
 `MOVE` will ask the Robot to change it's position one unit in the 
-direction it's facing.
+direction it's facing. Optionally, you can ask the Robot to move
+multiple units by providing the `STEPS` argument.
 
 #### Left and Right
 
-`LEFT` and `RIGHT` will tell the Robot to rotate in that direction.
+`LEFT` and `RIGHT` will tell the Robot to rotate in each direction.
 
 #### Report
 
@@ -103,6 +104,21 @@ Expected output:
 Expected output:
 
     0,0,SOUTH
+
+### Four corners fast
+
+    PLACE 0,0,NORTH
+    MOVE 4
+    RIGHT
+    MOVE 4
+    RIGHT
+    MOVE 4
+    RIGHT
+    REPORT
+
+Expected output:
+
+    4,0,WEST
 
 Notes
 ------------------------

@@ -178,7 +178,7 @@ class Robot
      *
      * @throws RobotException
      */
-    public function move(): void
+    public function move(int $steps = 1): void
     {
         $direction = $this->getDirection();
 
@@ -188,8 +188,8 @@ class Robot
 
         // Add the robots direction vector to it's position
         // to calculate it's new position on the Board.
-        $newPositionX = $this->position['x'] + $direction['x'];
-        $newPositionY = $this->position['y'] + $direction['y'];
+        $newPositionX = $this->position['x'] + ($direction['x'] * $steps);
+        $newPositionY = $this->position['y'] + ($direction['y'] * $steps);
 
         if (!$this->board->validatePosition($newPositionX, $newPositionY)) {
             throw new RobotException(
