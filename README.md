@@ -1,16 +1,17 @@
-Toy Robot Simulator
+Toy Robot
 ===================
 
-Coding challenge for Xplor by Alex McBain.
+A solution to the Toy Robot coding challenge for Xplor by Alex McBain.
 
-Installation and Usage Instructions
+Installation and Usage
 -----------
 
 ### Composer
 
 Install composer https://getcomposer.org/download/. 
 
-Use composer to install project dependencies:
+Use composer to install our dependencies. Composer is installed globally
+in the following examples.
 
 ``` bash
 composer install
@@ -24,17 +25,16 @@ composer test
 
 ### Usage
 
-To run the toy robot:
+Any text file containing Robot commands can be used.
 
 ``` bash
 php toy-robot.php commands/corner-to-corner
 ```
 
-Any text file containing commands for the robot can be used.
-
 ### Commands
 
-The robot will accept the following commands:
+The following commands will be accepted by the Robot. Invalid or
+incomplete commands will be ignored.
 
 ```
 PLACE X,Y,DIR
@@ -44,18 +44,31 @@ RIGHT
 REPORT
 ```
 
-When running the `PLACE` command, arguments `X` and `Y` determine the robot's position, and `DIR` determines the direction the robot will be facing.
+#### Place
 
-The robot can will accept the four compass directions for values of `DIR`:
+The `PLACE` command takes three arguments `X,Y,DIR`. `X` and `Y` give
+the Robot's position and `DIR` gives the compass direction that it will
+face. The Robot will ignore any other command if it is not yet placed.
 
-```
-NORTH
-EAST
-SOUTH
-WEST
-```
+#### Move
 
-Invalid or incomplete commands will be ignored by the robot.
+`MOVE` will ask the Robot to change it's position one unit in the 
+direction it's facing.
+
+#### Left and Right
+
+`LEFT` and `RIGHT` will tell the Robot to rotate in that direction.
+
+#### Report
+
+`REPORT` outputs the Robot's current position and direction as `X,Y,DIR`.
+
+### The Board
+
+The Robot's `X,Y` position is bounded by a 5x5 Board. The south-west
+corner has the position `0,0` and the north-east corner has the position
+`4,4`. The `MOVE` and `PLACE` commands will be ignored if it would
+result in a position that is out of bounds.
 
 Example Input and Output
 ------------------------
@@ -96,7 +109,8 @@ Notes
 
 ### Verbose Mode
 
-If you ever need to see what the robot is thinking you can use verbose mode:
+If you ever need to see what the Robot is thinking you can use the `-v`
+flag to enable verbose mode.
 
 ``` bash
 php toy-robot.php README.md -v
