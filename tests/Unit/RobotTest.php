@@ -20,11 +20,32 @@ class RobotTest extends TestCase
         $this->assertNull($this->robot->getPosition());
     }
 
-    public function testCannotSetInvalidPosition()
+    public function testCannotSetInvalidSouthWestPosition()
     {
         $this->expectException(RobotException::class);
 
         $this->robot->setPosition(-1, -1);
+    }
+
+    public function testCannotSetInvalidNorthWestPosition()
+    {
+        $this->expectException(RobotException::class);
+
+        $this->robot->setPosition(-1, 5);
+    }
+
+    public function testCannotSetInvalidNorthEastPosition()
+    {
+        $this->expectException(RobotException::class);
+
+        $this->robot->setPosition(5, 5);
+    }
+
+    public function testCannotSetInvalidSouthEastPosition()
+    {
+        $this->expectException(RobotException::class);
+
+        $this->robot->setPosition(5, -1);
     }
 
     public function testCanSetValidPosition()
