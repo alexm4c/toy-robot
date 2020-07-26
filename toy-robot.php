@@ -33,6 +33,8 @@
         $lines = explode(PHP_EOL, $filePath);
 
         foreach ($lines as $line) {
+            // Match commands in format " COMMAND ARGS ".
+            // This regex pattern is very loose and could probably be revised.
             $result = preg_match('/\s*(\S*)\s*(\S*)\s*/', $line, $matches);
 
             if (!$result) {
@@ -40,8 +42,8 @@
             }
 
             $command = $matches[1];
-            $arguments = $matches[2];
-
+            $arguments = $matches[2] ?? null;
+            
             if (!$command) {
                 continue;
             }
@@ -114,6 +116,12 @@
         ];
     }
 
+    /**
+     * Run this script.
+     *
+     * @param integer $argc
+     * @param array $argv
+     */
     function main(int $argc, array $argv)
     {
         $arguments = args($argc, $argv);
