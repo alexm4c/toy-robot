@@ -42,6 +42,15 @@ class ToyRobotTest extends TestCase
         $result = `$command`;
         $result = $result ? trim($result) : null;
 
-        $this->assertEquals(trim($result), '4,0,SOUTH');
+        $this->assertEquals($result, '4,0,SOUTH');
+    }
+
+    public function testCanRunInvalid()
+    {
+        $command = __DIR__ . '/../../toy-robot.php commands/invalid';
+        $result = `$command`;
+        $result = $result ? trim($result) : null;
+
+        $this->assertNull($result);
     }
 }
