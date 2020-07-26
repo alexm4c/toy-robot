@@ -71,9 +71,9 @@ class Robot
 
     /**
      * Get Robot position as (x, y) array.
-     * 
+     *
      * Format: ['x' => 3, 'y' => 3]
-     * 
+     *
      * @return array|null
      */
     public function getPosition(): ?array
@@ -216,7 +216,8 @@ class Robot
             throw new RobotException("Robot cannot rotate left if unplaced.");
         }
 
-        // Shift direction backwards while wrapping around at array boundaries
+        // Shift direction backwards while wrapping around at array boundaries.
+        // There is some duplication here with rotateLeft().
         $upperLimit = count(self::DIRECTIONS) - 1;
         $lowerLimit = 0;
 
@@ -243,7 +244,8 @@ class Robot
             throw new RobotException("Robot cannot rotate right if unplaced.");
         }
 
-        // Shift direction forwards while wrapping around at array boundaries
+        // Shift direction forwards while wrapping around at array boundaries.
+        // There is some duplication here with rotateLeft().
         $upperLimit = count(self::DIRECTIONS) - 1;
         $lowerLimit = 0;
 
