@@ -36,7 +36,14 @@ class RobotController
         try {
             switch ($command) {
                 case 'place':
-                    if (count($arguments) >= 3) {
+                    // Validate place command was given with
+                    // all three (X,Y,DIR) arguments and X and Y
+                    // are valid integer values.
+                    // This could probably be tidied up.
+                    if (count($arguments) >= 3
+                        && is_numeric($arguments[0])
+                        && is_numeric($arguments[1])
+                    ) {
                         $this->robot->place(
                             intval($arguments[0]), // X
                             intval($arguments[1]), // Y
@@ -54,10 +61,15 @@ class RobotController
                     $this->robot->rotateRight();
                     break;
                 case 'report':
-                    echo $this->robot->report() . "\n";
+                    print($this->robot->report() . "\n");
                     break;
                 default:
                     // Ignore invalid command
+
+                    // This is cool but a little too verbose
+                    // if ($verbose) {
+                    //    print("Ignored {$command}\n");
+                    // }
                     break;
             }
         } catch (RobotException $e) {
