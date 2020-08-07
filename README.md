@@ -1,7 +1,7 @@
 Toy Robot
 ===================
 
-A solution to the Toy Robot coding challenge for Xplor by Alex McBain.
+My solution to the Toy Robot PHP challenge.
 
 Installation and Usage
 -----------
