@@ -6,14 +6,6 @@ My solution to the Toy Robot PHP challenge.
 Installation and Usage
 -----------
 
-This project was primarily built and tested in a Debian environment running PHP7.3.
-
-### Prerequisites
-
-- PHP7.2 or greater
-- php-mbstring
-- php-xml
-
 ### Composer
 
 Install composer https://getcomposer.org/download/. 
